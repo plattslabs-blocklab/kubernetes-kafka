@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-loadbalancer
+  namespace: jolt
+spec:
+  selector:
+    app: kafka
+  ports:
+  - protocol: TCP
+    port: 9094
+    targetPort: 9094
+  type: LoadBalancer
