@@ -9,7 +9,7 @@ spec:
       app: zookeeper
       storage: persistent
   serviceName: "pzoo"
-  replicas: 2
+  replicas: 3
   updateStrategy:
     type: RollingUpdate
   podManagementPolicy: Parallel
@@ -20,16 +20,6 @@ spec:
         storage: persistent
       annotations:
     spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - zookeeper
-            topologyKey: "kubernetes.io/hostname"
       terminationGracePeriodSeconds: 10
       initContainers:
       - name: init-config
@@ -64,10 +54,10 @@ spec:
           name: leader-election
         resources:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 25m
+            memory: 250Mi
           limits:
-            memory: 120Mi
+            memory: 500Mi
         readinessProbe:
           exec:
             command:
