@@ -57,11 +57,11 @@ spec:
           name: leader-election
         resources:
           requests:
-            cpu: 25m
-            memory: 250Mi
-          limits:
             cpu: 50m
             memory: 500Mi
+          limits:
+            cpu: 100m
+            memory: 1Gi
         readinessProbe:
           exec:
             command:
