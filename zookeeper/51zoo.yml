@@ -9,7 +9,7 @@ spec:
       app: zookeeper
       storage: persistent-regional
   serviceName: "zoo"
-  replicas: 3
+  replicas: 2
   updateStrategy:
     type: RollingUpdate
   podManagementPolicy: Parallel
@@ -27,7 +27,7 @@ spec:
         command: ['/bin/bash', '/etc/kafka-configmap/init.sh']
         env:
         - name: ID_OFFSET
-          value: "4"
+          value: "3"
         volumeMounts:
         - name: configmap
           mountPath: /etc/kafka-configmap
@@ -58,10 +58,10 @@ spec:
         resources:
           requests:
             cpu: 50m
-            memory: 500Mi
+            memory: 250Mi
           limits:
             cpu: 100m
-            memory: 1Gi
+            memory: 500Mi
         readinessProbe:
           exec:
             command:
