@@ -121,4 +121,4 @@ spec:
       storageClassName: aws-efs
       resources:
         requests:
-          storage: 64Gi
+          storage: 256Gi
