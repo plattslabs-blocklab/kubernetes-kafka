@@ -56,7 +56,7 @@ data:
 
     default.replication.factor=3
 
-    min.insync.replicas=3
+    min.insync.replicas=2
 
     auto.create.topics.enable=false
 
