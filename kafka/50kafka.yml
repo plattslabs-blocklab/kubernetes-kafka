@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: kafka
   serviceName: "broker"
-  replicas: 3
+  replicas: 2
   updateStrategy:
     type: RollingUpdate
   podManagementPolicy: Parallel
@@ -89,11 +89,11 @@ spec:
              command: ["sh", "-ce", "kill -s TERM 1; while $(kill -0 1 2>/dev/null); do sleep 1; done"]
         resources:
           requests:
-            cpu: 200m
-            memory: 4Gi
+            cpu: 50m
+            memory: 1Gi
           limits:
-            cpu: 400m
-            memory: 8Gi
+            cpu: 100m
+            memory: 2Gi
         readinessProbe:
           tcpSocket:
             port: 9092
@@ -121,4 +121,4 @@ spec:
       storageClassName: aws-efs
       resources:
         requests:
-          storage: 512Gi
+          storage: 128Gi

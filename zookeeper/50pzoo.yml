@@ -9,7 +9,7 @@ spec:
       app: zookeeper
       storage: persistent
   serviceName: "pzoo"
-  replicas: 3
+  replicas: 2
   updateStrategy:
     type: RollingUpdate
   podManagementPolicy: Parallel
@@ -54,11 +54,11 @@ spec:
           name: leader-election
         resources:
           requests:
-            cpu: 50m
-            memory: 500Mi
+            cpu: 10m
+            memory: 100Mi
           limits:
-            cpu: 100m
-            memory: 1Gi
+            cpu: 20m
+            memory: 200Mi
         readinessProbe:
           exec:
             command:
@@ -84,4 +84,4 @@ spec:
       storageClassName: aws-efs
       resources:
         requests:
-          storage: 8Gi
+          storage: 5Gi
