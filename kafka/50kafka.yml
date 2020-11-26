@@ -89,10 +89,10 @@ spec:
              command: ["sh", "-ce", "kill -s TERM 1; while $(kill -0 1 2>/dev/null); do sleep 1; done"]
         resources:
           requests:
-            cpu: 250m
+            cpu: 200m
             memory: 2Gi
           limits:
-            cpu: 500m
+            cpu: 400m
             memory: 4Gi
         readinessProbe:
           tcpSocket:
