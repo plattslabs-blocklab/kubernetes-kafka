@@ -17,6 +17,16 @@ spec:
       labels:
         app: kafka
       annotations:
+        ad.datadoghq.com/kafka.check_names: '["kafka"]'
+        ad.datadoghq.com/kafka.init_configs: '[{"is_jmx": true,"collect_default_metrics": true}]'
+        ad.datadoghq.com/kafka.logs: '[{"source":"kafka","service":"kafka"}]'
+        ad.datadoghq.com/kafka.instances: |
+          [
+            {
+              "host":"%%host%%",
+              "port":"9999"
+            }
+          ]
     spec:
       affinity:
         podAntiAffinity:
@@ -63,15 +73,8 @@ spec:
         - name: extensions
           mountPath: /opt/kafka/libs/extensions
       containers:
-      - name: broker
+      - name: kafka
         image: solsson/kafka:2.4.1@sha256:79761e15919b4fe9857ec00313c9df799918ad0340b684c0163ab7035907bb5a
-        env:
-        - name: CLASSPATH
-          value: /opt/kafka/libs/extensions/*
-        - name: KAFKA_LOG4J_OPTS
-          value: -Dlog4j.configuration=file:/etc/kafka/log4j.properties
-        - name: JMX_PORT
-          value: "5555"
         ports:
         - name: inside
           containerPort: 9092
@@ -79,7 +82,28 @@ spec:
           containerPort: 9094
           hostPort: 9094
         - name: jmx
-          containerPort: 5555
+          containerPort: 9999
+        env:
+        - name: CLASSPATH
+          value: /opt/kafka/libs/extensions/*
+        - name: KAFKA_LOG4J_OPTS
+          value: -Dlog4j.configuration=file:/etc/kafka/log4j.properties
+        - name: JMX_PORT
+          value: "9999"
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: JAVA_OPTS
+          value: >-
+            -Xms256m -Xmx6144m
+            -Dcom.sun.management.jmxremote
+            -Dcom.sun.management.jmxremote.authenticate=false
+            -Dcom.sun.management.jmxremote.ssl=false
+            -Dcom.sun.management.jmxremote.local.only=false
+            -Dcom.sun.management.jmxremote.port=9999
+            -Dcom.sun.management.jmxremote.rmi.port=9999
+            -Djava.rmi.server.hostname=$(POD_IP)
         command:
         - ./bin/kafka-server-start.sh
         - /etc/kafka/server.properties
@@ -103,6 +127,8 @@ spec:
           mountPath: /etc/kafka
         - name: data
           mountPath: /var/lib/kafka/data
+        - name: log
+          mountPath: /var/lib/kafka/log
         - name: extensions
           mountPath: /opt/kafka/libs/extensions
       volumes:
@@ -122,3 +148,11 @@ spec:
       resources:
         requests:
           storage: 256Gi
+  - metadata:
+      name: log
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: aws-efs
+      resources:
+        requests:
+          storage: 32Gi
