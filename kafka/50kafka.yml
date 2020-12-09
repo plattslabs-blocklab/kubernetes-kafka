@@ -29,8 +29,8 @@ spec:
         ad.datadoghq.com/kafka.instances: |
           [
             {
-              "host":"%%host%%",
-              "port":"9999"
+              "host": "%%host%%",
+              "port": "9999"
             }
           ]
     spec:
