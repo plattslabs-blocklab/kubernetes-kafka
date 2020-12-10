@@ -20,16 +20,17 @@ spec:
         ad.datadoghq.com/kafka.check_names: '["kafka"]'
         ad.datadoghq.com/kafka.init_configs: |
           [
-            { "is_jmx": true,
+            {
+              "is_jmx": true,
               "collect_default_metrics": true
             }
           ]
-        ad.datadoghq.com/kafka.logs: '[{"source":"kafka","service":"kafka"}]'
+        ad.datadoghq.com/kafka.logs: '[{"source":"kafka","service":"broker"}]'
         ad.datadoghq.com/kafka.instances: |
           [
             {
-              "host":"%%host%%",
-              "port":"9999"
+              "host": "%%host%%",
+              "port": "9999"
             }
           ]
     spec:
