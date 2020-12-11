@@ -109,10 +109,10 @@ data:
     #socket.request.max.bytes=104857600
 
     # The maximum size of any message replication
-    replica.fetch.max.bytes=10485760
+    replica.fetch.max.bytes=104857600
 
     # The maximum size of any message
-    message.max.bytes=10485760
+    message.max.bytes=104857600
 
     ############################# Internal Topic Settings  #############################
     # The replication factor for the group metadata internal topics "__consumer_offsets" and "__transaction_state"
