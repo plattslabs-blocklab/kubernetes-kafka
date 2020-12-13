@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: outside-0
-  namespace: jolt
+  namespace: jolt-dev
 spec:
   selector:
     app: kafka
