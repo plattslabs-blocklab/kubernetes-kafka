@@ -20,8 +20,14 @@ spec:
         storage: persistent-regional
       annotations:
         ad.datadoghq.com/zookeeper.check_names: '["zk"]'
-        ad.datadoghq.com/zookeeper.init_configs: '[{}]'
-        ad.datadoghq.com/zookeeper.logs: '[{"source":"zookeeper", "service":"zoo"}]'
+        ad.datadoghq.com/zookeeper.init_configs: '{}'
+        ad.datadoghq.com/zookeeper.logs: |
+          [
+            {
+              "source": "zookeeper",
+              "service": "zoo"
+            }
+          ]
         ad.datadoghq.com/zookeeper.instances: |
           [
             {
