@@ -19,6 +19,23 @@ spec:
         app: zookeeper
         storage: persistent-regional
       annotations:
+        ad.datadoghq.com/zookeeper.check_names: '["zookeeper"]'
+        ad.datadoghq.com/zookeeper.init_configs: '[{}]'
+        ad.datadoghq.com/zookeeper.instances: |
+          [
+            {
+              "host": "%%host%%",
+              "port": "2181"
+
+            }
+          ]
+        ad.datadoghq.com/zookeeper.logs: |
+          [
+            {
+              "source": "zookeeper",
+              "service": "zoo"
+            }
+          ]
     spec:
       terminationGracePeriodSeconds: 10
       initContainers:
