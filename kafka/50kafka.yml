@@ -25,7 +25,13 @@ spec:
               "collect_default_metrics": true
             }
           ]
-        ad.datadoghq.com/kafka.logs: '[{"source":"kafka", "service":"broker"}]'
+        ad.datadoghq.com/kafka.logs: |
+          [
+            {
+              "source": "kafka",
+              "service": "broker"
+            }
+          ]
         ad.datadoghq.com/kafka.instances: |
           [
             {

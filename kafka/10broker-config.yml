@@ -106,13 +106,16 @@ data:
     #socket.receive.buffer.bytes=102400
 
     # The maximum size of a request that the socket server will accept (protection against OOM)
-    #socket.request.max.bytes=104857600
+    socket.request.max.bytes=1048576000
+    # 1GBi
 
     # The maximum size of any message replication
     replica.fetch.max.bytes=104857600
+    # 100MBi
 
     # The maximum size of any message
     message.max.bytes=104857600
+    # 100MBi
 
     ############################# Internal Topic Settings  #############################
     # The replication factor for the group metadata internal topics "__consumer_offsets" and "__transaction_state"
