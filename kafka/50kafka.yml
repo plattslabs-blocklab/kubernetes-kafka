@@ -100,6 +100,10 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
+        - name: KAFKA_HEAP_OPTS
+          value: >-
+            -Xmx4g
+            -Xms4g
         - name: KAFKA_JMX_OPTS
           value: >-
             -Dcom.sun.management.jmxremote=true
